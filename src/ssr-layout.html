@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html meta-ssr {{{ meta.inject().htmlAttrs.text() }}}>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{{ meta.inject().meta.text() }}}
+  {{{ meta.inject().title.text() }}}
+  {{{ meta.inject().link.text() }}}
+</head>
+<body>
+  <div id="app-outlet">
+    <!--vue-ssr-outlet-->
+  </div>
+  ${ 
+    process.env.NODE_ENV === 'production'
+      ? require('./yandex.metrica.html')
+      : ''
+  }
+</body>
+</html>

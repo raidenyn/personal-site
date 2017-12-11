@@ -1,0 +1,23 @@
+{
+    "presets": [
+        ["@babel/preset-env", {
+            "targets": {
+                "browsers": ["last 2 versions", "safari >= 8", "ie >= 10"]
+            },
+            "loose": true,
+            "debug": false,
+            "module": "commonjs",
+            "useBuiltIns": "usage"
+        }]
+    ],
+    "plugins": [
+        "transform-vue-jsx",
+        "transform-class-properties",
+        ["@babel/plugin-transform-runtime", {
+            "helpers": false,
+            "polyfill": false,
+            "regenerator": true,
+            "moduleName": "@babel/runtime"
+        }]
+    ]
+}

@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "tslint-config-standard",
+    "tslint-config-prettier",
+    "tslint-config-airbnb"
+  ],
+  "rules": {
+    "import-name": false,
+    "ter-indent": 4,
+    "align":false,
+    "max-line-length": 140,
+    "object-shorthand-properties-first": false,
+    "no-unused-variable": true,
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"]
+  }
+}

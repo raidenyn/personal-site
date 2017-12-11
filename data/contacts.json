@@ -1,0 +1,17 @@
+[
+    {
+        "id": "github",
+        "text": "raidenyn",
+        "link": "https://github.com/raidenyn"
+    },
+    {
+        "id": "linkedin",
+        "text": "Yuriy Nagaev",
+        "link": "https://www.linkedin.com/in/yuriy-nagaev-000988124/"
+    },
+    {
+        "id": "envelope",
+        "text": "y@nagaev.me",
+        "link": "mailto:y@nagaev.me"
+    }
+]

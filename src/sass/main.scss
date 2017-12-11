@@ -1,0 +1,25 @@
+@import "./variables";
+@import "~bootstrap/scss/bootstrap";
+
+/*
+ * Base structure
+ */
+html, body, #app-outlet, #app-main {
+  height: 100%;
+}
+#app-main {
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1 0 auto;
+}
+
+/*
+ * Footer
+ */
+.footer {
+  .copyright {
+    text-align: center;
+  }
+}

@@ -1,0 +1,84 @@
+// tslint:disable:variable-name
+import { root } from '../helpers';
+import { clientConfig,  IClientAppWebpackOptions } from './webpack.config.client';
+
+import env from '../environment/dev.env';
+import { configurations } from './webpack.config.base';
+
+import merge = require('webpack-merge');
+
+import HtmlWebpackPlugin = require('html-webpack-plugin');
+import WriteFilePlugin = require('write-file-webpack-plugin');
+import DefinePlugin = require('webpack/lib/DefinePlugin');
+import ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+export function clientDevConfig(options: IClientAppWebpackOptions) {
+    const base = clientConfig(options);
+
+    return merge(base, {
+        /**
+         * In dev mode emit files with lang prefix
+         */
+        output: {
+            filename: `js/[name]-${options.lang}.js`,
+        },
+        /**
+         * Enable including source map
+         */
+        devtool: 'source-map',
+        plugins: [
+            /**
+             * Extract all styles into separated file
+             */
+            new ExtractTextPlugin({
+                filename: 'css/[name].css',
+                allChunks: true,
+            }),
+            /**
+             * Force swap all files to disk
+             * For SSR environment all files is processed by Express
+             */
+            new WriteFilePlugin(),
+            /**
+             * Emit layout file for SSR
+             */
+            new HtmlWebpackPlugin({
+                inject: false,
+                template: root('/src/ssr-layout.html'),
+                filename: `ssr-layout-${options.lang}.html`,
+            }),
+            /**
+             * Emit SPA index file for fallback
+             */
+            new HtmlWebpackPlugin({
+                inject: true,
+                template: root('/src/spa-index.html'),
+                filename: `spa-index-${options.lang}.html`,
+            }),
+            /**
+             * Put environment constants for using inside code
+             */
+            new DefinePlugin({
+                ENVIRONMENT: env,
+            }),
+        ],
+        /**
+         * Dev server reloads site on file changing
+         */
+        devServer: {
+            port: 8081,
+            host: 'localhost',
+            historyApiFallback: true,
+            watchOptions: {
+                aggregateTimeout: 300,
+                poll: 1000,
+            },
+            contentBase: './dist',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            },
+        },
+    });
+}
+
+export default configurations(clientDevConfig);
