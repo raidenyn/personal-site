@@ -5,11 +5,14 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import createRouter from './router';
 import createStore from './store';
 import app from './app.vue';
+import prefetch from './mixins/prefetch';
 import { sync } from 'vuex-router-sync';
 
 import './types/env';
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+
+Vue.mixin(prefetch);
 
 Vue.use(Meta, {
     ssrAttribute: 'meta-ssr',

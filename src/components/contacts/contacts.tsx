@@ -8,24 +8,32 @@ import { faEnvelope } from '@fortawesome/fontawesome-free-solid';
 
 import './contacts.scss';
 
+const icons = {
+    linkedin: faLinkedin,
+    github: faGithub,
+    envelope: faEnvelope,
+};
+
 @Component({
     metaInfo: {
         title: '$lang-en(Contacts)$lang-ru(Контактная информация)',
     },
 })
 export class ContactsComponent extends Vue {
-    public readonly icons = {
-        linkedin: faLinkedin,
-        github: faGithub,
-        envelope: faEnvelope,
-    };
-    
-    public static asyncData ({ store, route }: { store: AppStoreType, route: Route }) {
+    public contacts: IContactItem[] = [];
+
+    public static prefetch ({ store, route }: { store: AppStoreType, route: Route }) {
         // return Promise from the action
-        return store.actions.content.load();
+        return store.actions.content.load().then(() => {
+            return {
+                contacts: store.state.content.list,
+            };
+        });
     }
     
-    public get items() { return this.$store.state.content.list; }
+    public get items() {
+        return this.contacts; 
+    }
 
     public render(h) {
         return <div>
@@ -40,7 +48,7 @@ export class ContactsComponent extends Vue {
     private item(item: IContactItem) {
         return <li class="p-3">
                     <a href={item.link}>
-                        <font-awesome-icon icon={this.icons[item.id]} width="15px" />&nbsp;
+                        <font-awesome-icon icon={icons[item.id]} width="15px" />&nbsp;
                         {item.text}
                     </a>
                </li>;

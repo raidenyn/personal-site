@@ -19,16 +19,20 @@ export default (context: Request) => {
             throw new Error('Route is not found.');
         }
 
-        await Promise.all(matchedComponents.map((componentType: any) => {
-            if (typeof componentType.asyncData === 'function') {
-                return componentType.asyncData({
+        const componentStates: any[] = [];
+        await Promise.all(matchedComponents.map(async (componentType: any) => {
+            if (typeof componentType.prefetch === 'function') {
+                const $data = await componentType.prefetch({
                     store: app.$store,
                     route: app.$router,
                 });
+                componentType.prefetchedData = $data;
+                componentStates.push($data);
             }
         }));
 
         context.state = app.$store.state;
+        (context.state as any).__INITIAL_COMPONENTS_STATE__ = componentStates;
 
         if (context.route) {
             if (app.$route.matched[0].path === '*') {
