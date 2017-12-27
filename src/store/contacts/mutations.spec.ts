@@ -1,5 +1,5 @@
 // tslint:disable:no-unused-expression
-import { ContentMutations } from './mutations';
+import { ContactsMutations } from './mutations';
 import { expect } from 'chai';
 import MockAdapter = require('axios-mock-adapter');
 import axios from 'axios';
@@ -8,7 +8,7 @@ import createStore, { AppStoreType } from '../';
 import '../../util/chai.pluggins';
 
 describe('ContentModule - Mutations', () => {
-    let mutations: ContentMutations;
+    let mutations: ContactsMutations;
     let mock: MockAdapter;
     let store: AppStoreType;
 
@@ -17,7 +17,7 @@ describe('ContentModule - Mutations', () => {
 
         store = createStore({ strict: false });
 
-        mutations = store.mutations.content;
+        mutations = store.mutations.contacts;
     });
 
     afterEach(() => {
@@ -32,11 +32,11 @@ describe('ContentModule - Mutations', () => {
         });
 
         it('should add value to the list', () => {
-            store.state.content.list = [{ id: '1', text: 'text', link: 'link' }];
+            store.state.contacts.list = [{ id: '1', text: 'text', link: 'link' }];
 
             add({ id: '2', text: 'text2', link: 'link2' });
 
-            expect(store.state.content.list).is.deep.equal([{ id: '1', text: 'text', link: 'link' }, { id: '2', text: 'text2', link: 'link2' }]);
+            expect(store.state.contacts.list).is.deep.equal([{ id: '1', text: 'text', link: 'link' }, { id: '2', text: 'text2', link: 'link2' }]);
         });
     });
 
@@ -48,19 +48,19 @@ describe('ContentModule - Mutations', () => {
         });
 
         it('should pop last value from the list', () => {
-            store.state.content.list = [{ id: '1', text: 'text', link: 'link' }, { id: '2', text: 'text2', link: 'link2' }];
+            store.state.contacts.list = [{ id: '1', text: 'text', link: 'link' }, { id: '2', text: 'text2', link: 'link2' }];
 
             pop();
 
-            expect(store.state.content.list).is.deep.equal([{ id: '1', text: 'text', link: 'link' }]);
+            expect(store.state.contacts.list).is.deep.equal([{ id: '1', text: 'text', link: 'link' }]);
         });
 
         it(`shouldn't change anything on empty list`, () => {
-            store.state.content.list = [];
+            store.state.contacts.list = [];
 
             pop();
 
-            expect(store.state.content.list).is.deep.equal([]);
+            expect(store.state.contacts.list).is.deep.equal([]);
         });
     });
 
@@ -76,7 +76,7 @@ describe('ContentModule - Mutations', () => {
 
             set(newArray);
 
-            expect(store.state.content.list).is.equal(newArray);
+            expect(store.state.contacts.list).is.equal(newArray);
         });
     });
 });

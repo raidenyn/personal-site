@@ -1,5 +1,5 @@
 // tslint:disable:no-unused-expression
-import { ContentGetters } from './getters';
+import { ContactsGetters } from './getters';
 import { expect } from 'chai';
 import MockAdapter = require('axios-mock-adapter');
 import axios from 'axios';
@@ -8,7 +8,7 @@ import createStore, { AppStoreType } from '../';
 import '../../util/chai.pluggins';
 
 describe('ContentModule - Getters', () => {
-    let getters: ContentGetters;
+    let getters: ContactsGetters;
     let mock: MockAdapter;
     let store: AppStoreType;
 
@@ -17,7 +17,7 @@ describe('ContentModule - Getters', () => {
 
         store = createStore({ strict: false });
 
-        getters = store.getters.content;
+        getters = store.getters.contacts;
     });
 
     afterEach(() => {
@@ -32,11 +32,11 @@ describe('ContentModule - Getters', () => {
         });
 
         it('should return length of list', () => {
-            store.state.content.list = ['', ''] as any;
+            store.state.contacts.list = ['', ''] as any;
 
             expect(getters.count).is.equal(2);
 
-            store.state.content.list = ['', '', ''] as any;
+            store.state.contacts.list = ['', '', ''] as any;
 
             expect(getters.count).is.equal(3);
         });

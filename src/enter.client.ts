@@ -1,5 +1,6 @@
 import createApp from './enter.base';
 import VueRouter from 'vue-router';
+import { restoreComponents, prefetchComponents } from './util/prefetch-components';
 
 import './sass/main.scss';
 
@@ -23,11 +24,11 @@ if (state) {
 
     if (componentStates) {
         app.$router.onReady(() => {
-            const comps = app.$router.getMatchedComponents().filter((comp: any) => typeof comp.prefetch === 'function');
+            restoreComponents(componentStates, app.$router);
 
-            for (const index in componentStates) {
-                (comps[index] as any).prefetchedData = componentStates[index];
-            }
+            app.$router.beforeResolve((to, from, next) => {
+                prefetchComponents(app.$store, app.$router, to, from).then(next as any, next);
+            });
         });
     }
 }

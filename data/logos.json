@@ -1,0 +1,12 @@
+{
+    "ubuntu": "Ubuntu",
+    "docker": "Docker, Docker Compose",
+    "nginx": "Nginx, Nginx Amplify",
+    "nodejs": "NodeJS",
+    "express": "Express",
+    "vue": "Vue, Vue SSR, Vuex",
+    "typescript": "TypeScript",
+    "webpack": "Webpack",
+    "babel": "Babel",
+    "bootstrap": "Bootstrap"
+}

@@ -1,14 +1,14 @@
 // tslint:disable:no-unused-expression
-import { ContentActions } from './actions';
+import { ContactsActions } from './actions';
 import { expect } from 'chai';
 import MockAdapter = require('axios-mock-adapter');
-import contentModule from './';
+import contactsModule from './';
 import createStore, { AppStoreType } from '../';
 import '../../util/chai.pluggins';
-import { http } from '../../http';
+import { http } from '../../clients/http';
 
 describe('ContentModule - Actions', () => {
-    let actions: ContentActions;
+    let actions: ContactsActions;
     let mock: MockAdapter;
     let store: AppStoreType;
 
@@ -17,7 +17,7 @@ describe('ContentModule - Actions', () => {
 
         store = createStore({ strict: false });
 
-        actions = store.actions.content;
+        actions = store.actions.contacts;
     });
 
     afterEach(() => {
@@ -38,7 +38,7 @@ describe('ContentModule - Actions', () => {
 
             await load();
 
-            expect(store.state.content.list).is.deep.equal([{ id: 1, name: 'John Smith' }]);
+            expect(store.state.contacts.list).is.deep.equal([{ id: 1, name: 'John Smith' }]);
         });
 
         it('should rise error on server error response', () => {

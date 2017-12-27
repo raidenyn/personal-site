@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import { install, module, store } from 'sinai';
-import content from './content';
-import { ContentState } from './content/state';
+import contacts from './contacts';
+import { ContactsState } from './contacts/state';
 import { VueStore } from 'sinai/lib/vue';
 import { returnType } from '../util/return-type';
 
 Vue.use(install);
 
 const createStore = ({ strict } = { strict: ENVIRONMENT.MODE !== 'production' }) => {
-    const root = module().child('content', content);
+    const root = module().child('contacts', contacts);
     
     return store(root, {
         strict,
@@ -18,7 +18,7 @@ const createStore = ({ strict } = { strict: ENVIRONMENT.MODE !== 'production' })
 export default createStore;
 
 export interface IAppState {
-    content: ContentState;
+    contacts: ContactsState;
 }
 
 const appStore = returnType(createStore);

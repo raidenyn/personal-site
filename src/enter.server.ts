@@ -1,7 +1,8 @@
 import createApp from './enter.base';
 import { Request } from 'express';
 import { Component } from 'vue-router/types/router';
-import { http } from './http';
+import { http } from './clients/http';
+import { prefetchComponents } from './util/prefetch-components';
 
 export default (context: Request) => {
     const app = createApp();
@@ -14,22 +15,7 @@ export default (context: Request) => {
     }
 
     async function preparePage() {
-        const matchedComponents = app.$router.getMatchedComponents();
-        if (!matchedComponents.length) {
-            throw new Error('Route is not found.');
-        }
-
-        const componentStates: any[] = [];
-        await Promise.all(matchedComponents.map(async (componentType: any) => {
-            if (typeof componentType.prefetch === 'function') {
-                const $data = await componentType.prefetch({
-                    store: app.$store,
-                    route: app.$router,
-                });
-                componentType.prefetchedData = $data;
-                componentStates.push($data);
-            }
-        }));
+        const componentStates = await prefetchComponents(app.$store, app.$router);
 
         context.state = app.$store.state;
         (context.state as any).__INITIAL_COMPONENTS_STATE__ = componentStates;

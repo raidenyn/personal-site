@@ -2,6 +2,9 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Logger } from '../util/log';
 import { spawn } from 'child_process';
+import { AppStoreType } from '../store/index';
+import { Route } from 'vue-router';
+import { ILogos, LogosClient } from '../clients/logos';
 
 @Component({
     metaInfo: {
@@ -9,24 +12,27 @@ import { spawn } from 'child_process';
     },
 })
 export class AboutComponent extends Vue {
+    public logos?: ILogos;
+    
+    /**
+     * This prefetch function load data directly from a data client
+     * The data from server called every time on new component instance is created
+     */
+    public static async prefetch ({ store, route }: { store: AppStoreType, route: Route }) {
+        const client = new LogosClient();
+        
+        // call data from the server
+        const logos = await client.list();
 
-    public logos = {
-        ubuntu: 'Ubuntu',
-        docker: 'Docker, Docker Compose',
-        nginx: 'Nginx, Nginx Amplify',
-        nodejs: 'NodeJS',
-        express: 'Express',
-        vue: 'Vue, Vue SSR, Vuex',
-        typescript: 'TypeScript',
-        webpack: 'Webpack',
-        babel: 'Babel',
-        bootstrap: 'Bootstrap',
-    };
+        return {
+            logos, // will update class instance field
+        };
+    }
 
     render(h) {
         return <div class="container">
                     <h1 lang="en">Starring</h1>
-                    <h1 lang="ru">В гоавных ролях</h1>
+                    <h1 lang="ru">В главных ролях</h1>
 
                     <div class="row align-items-center">
                         {
