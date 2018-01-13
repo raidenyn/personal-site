@@ -5,7 +5,7 @@ import { SwitchLanguageComponent } from './components/switch-lang';
 import { VERSION } from './version';
 
 export default {
-    name: 'trapezaria',
+    name: 'ynagaev',
     components: {
         navbar: NavbarComponent,
         'switch-lang': SwitchLanguageComponent,
@@ -19,7 +19,7 @@ export default {
     },
     computed: {
         version: () => VERSION,
-    }
+    },
 };
 </script>
 

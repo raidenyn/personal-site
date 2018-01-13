@@ -3,12 +3,15 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 
 import '../types/meta-info';
+import '../types/server-cache';
 import '../types/env';
 
 @Component({
     metaInfo: {
         title: '$lang-en(Home)$lang-ru(Домашняя страница)'
     },
+    name: 'home',
+    serverCacheKey: (props) => '123',
 })
 export default class HomeComponent extends Vue {
     render(h, c) {

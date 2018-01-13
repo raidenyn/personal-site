@@ -8,6 +8,7 @@ import { promisify } from 'util';
 const readFile = promisify(fs.readFile);
 import './src/types/meta-info';
 import * as cookieParser from 'cookie-parser';
+import LRU = require('lru-cache');
 
 const server = express();
 
@@ -22,6 +23,10 @@ export async function createRenderer(lang: string) {
         runInNewContext: false,
         template: layout,
         clientManifest: JSON.parse(clientManifest),
+        cache: LRU({
+            max: 10000,
+            maxAge: 20 * 1000, // 20 sec
+        }),
     });
 }
 
