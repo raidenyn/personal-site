@@ -2,6 +2,7 @@
     "compilerOptions": {
         "lib": [
             "dom",
+            "webworker",
             "es2017"
         ],
         "module": "commonjs",

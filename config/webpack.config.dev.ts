@@ -1,9 +1,8 @@
 // tslint:disable:variable-name
 import { root } from '../helpers';
-import { clientConfig,  IClientAppWebpackOptions } from './webpack.config.client';
+import { clientConfig, configurations, IClientAppWebpackOptions } from './webpack.config.client';
 
 import env from '../environment/dev.env';
-import { configurations } from './webpack.config.base';
 
 import merge = require('webpack-merge');
 

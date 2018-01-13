@@ -1,10 +1,10 @@
 // tslint:disable:variable-name
 import { root, node_modules } from '../helpers';
-import { baseConfig,  IAppWebpackOptions } from './webpack.config.base';
+import { baseConfig, configurations as baseConfigurations, IAppWebpackOptions } from './webpack.config.base';
+import { swConfig } from './webpack.config.sw';
 
 import webpack = require('webpack');
 import merge = require('webpack-merge');
-import glob = require('glob');
 
 import ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 import VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
@@ -12,6 +12,10 @@ import CopyWebpackPlugin = require('copy-webpack-plugin');
 import autoprefixer = require('autoprefixer');
 import ExtractTextPlugin = require('extract-text-webpack-plugin');
 import FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+
+export function configurations(config: (options: IClientAppWebpackOptions) => webpack.Configuration, options?: IClientAppWebpackOptions) {
+    return baseConfigurations(config, options);
+} 
 
 export interface IClientAppWebpackOptions extends IAppWebpackOptions { }
 
@@ -34,10 +38,6 @@ export function clientConfig(options: IClientAppWebpackOptions) {
              * Additional Bootstrap files
              */
             bootstrap,
-            /**
-             * Static data
-             */
-            data: glob.sync(root('/data/**/*.json')),
         },
         resolve: {
             /**
@@ -49,13 +49,6 @@ export function clientConfig(options: IClientAppWebpackOptions) {
         },
         module: {
             rules: [
-                /**
-                 * Handle json file as is and copy them into `data` folder
-                 */
-                {
-                    test: /\.json$/,
-                    loader: 'file-loader?name=data/[name].[ext]',
-                },
                 /**
                  * Extract all styles into one separated file
                  */
@@ -147,6 +140,13 @@ export function clientConfig(options: IClientAppWebpackOptions) {
             new CopyWebpackPlugin([{
                 from: 'src/assets',
                 to: './assets',
+            }]),
+            /**
+             * Copy data files
+             */
+            new CopyWebpackPlugin([{
+                from: 'data',
+                to: './data',
             }]),
             /**
              * Generate Vue SSR manifest for client side

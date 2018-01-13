@@ -13,7 +13,7 @@ export class SwitchLanguageComponent extends Vue {
     
     render(h) {
         return <div>
-                    <button class="btn btn-link cursor" onClick={this.toogle} style="cursor: pointer;">
+                    <button class="btn btn-link cursor" onClick={this.toggle} style="cursor: pointer;">
                         <span lang="ru">
                             eng
                         </span>
@@ -42,7 +42,7 @@ export class SwitchLanguageComponent extends Vue {
         return this.current === 'ru' ? 'en' : 'ru';
     }
 
-    toogle() {
+    toggle() {
         this._current = this.inverse;
         Cookie.set('lang', this._current);
 

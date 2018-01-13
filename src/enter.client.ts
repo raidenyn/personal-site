@@ -1,6 +1,7 @@
 import createApp from './enter.base';
 import VueRouter from 'vue-router';
 import { restoreComponents, prefetchComponents } from './util/prefetch-components';
+import { registerServiceWorker } from './service-worker/registration';
 
 import './sass/main.scss';
 
@@ -34,3 +35,7 @@ if (state) {
 }
 
 app.$mount('#app-outlet');
+
+if (ENVIRONMENT.MODE === 'production') {
+    registerServiceWorker();
+}
