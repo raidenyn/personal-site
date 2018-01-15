@@ -3,7 +3,9 @@ const sw = self as any as ServiceWorkerGlobalScope;
 const cacheVersion = 'v1';
 
 sw.addEventListener('fetch', (event) => {
-    if (!event.request.url.startsWith('chrome-extension')) {
+    if (!event.request.url.startsWith('chrome-extension')
+        && event.request.method === 'GET'
+    ) {
         event.respondWith(
             fetch(event.request).then((response) => {
                 return caches.open(cacheVersion).then((cache) => {
