@@ -31,7 +31,7 @@ export class AboutComponent extends Vue {
         };
     }
 
-    render(h) {
+    public render(h) {
         return <div class="container">
                     <h1 lang="en">Starring</h1>
                     <h1 lang="ru">В главных ролях</h1>

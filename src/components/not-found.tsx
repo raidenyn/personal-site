@@ -9,7 +9,7 @@ import Component from 'vue-class-component';
     serverCacheKey: props => '-',
 })
 export class NotFoundPage extends Vue {
-    render(h) {
+    public render(h) {
         return <div>
                     <p>Oops. Page not found :(</p>
                </div>;

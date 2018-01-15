@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import { NavbarComponent } from './components/navbar';
 import { SwitchLanguageComponent } from './components/switch-lang';
+import { SiteLinkComponent } from './components/shared/site-link';
 import { VERSION } from './version';
 
 export default {
@@ -9,6 +10,7 @@ export default {
     components: {
         navbar: NavbarComponent,
         'switch-lang': SwitchLanguageComponent,
+        'site-link': SiteLinkComponent,
     },
     metaInfo: {
       title: 'Yuriy Nagaev',
@@ -28,10 +30,10 @@ export default {
     <header class="header clearfix">
       <nav class="navbar navbar-expand-sm navbar-dark justify-content-between">
         <h3 class="navbar-brand">
-            <a href="/">
+            <site-link href="/">
                 <img src="/assets/img/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
                 YN
-            </a>
+            </site-link>
         </h3>
 
         <switch-lang></switch-lang>

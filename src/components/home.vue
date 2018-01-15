@@ -14,7 +14,7 @@ import '../types/env';
     serverCacheKey: props => '-',
 })
 export default class HomeComponent extends Vue {
-    render(h, c) {
+    public render(h, c) {
         return <div>
                     <span lang="en">
                         <h1>Hi everebody!</h1>

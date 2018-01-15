@@ -2,10 +2,14 @@ import Vue from 'vue';
 import { Component, Watch } from 'vue-property-decorator';
 import { Link } from './link';
 import { Logger } from '../../util/log';
+import { SiteLinkComponent } from '../shared/site-link';
 
 @Component({
     name: 'navbar',
     serverCacheKey: props => '-',
+    components: {
+        'site-link': SiteLinkComponent,
+    },
 })
 export class NavbarComponent extends Vue {
     public inverted: boolean = true; // default value
@@ -23,33 +27,26 @@ export class NavbarComponent extends Vue {
     protected logger: Logger;
 
     @Watch('$route.path')
-    pathChanged() {
+    public pathChanged() {
         this.logger.info('Changed current path to: ' + this.$route.path);
     }
 
-    mounted() {
+    public mounted() {
         if (!this.logger) this.logger = new Logger();
         this.$nextTick(() => this.logger.info(this.object.default));
     }
 
-    render(h) {
+    public render(h) {
         return <ul class="navbar-nav">
                 {
                     this.links.map((link) => {
                         return <li class={{ active : this.$route.path === link.path, 'nav-item': true }}>
-                                    {this.link(link)}
+                                    <site-link class="nav-link" href={ link.path }>
+                                        { link.name }
+                                    </site-link>
                                </li>;
                     })
                 }
                 </ul>;
-    }
-
-    link(link: Link) {
-        if (this.$route.path === link.path) {
-            return <span class="nav-link">{link.name}</span>;
-        }
-        return <router-link to={ link.path } class="nav-link">
-                 {link.name}
-               </router-link>;
     }
 }

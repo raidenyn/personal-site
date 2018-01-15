@@ -13,7 +13,7 @@ import * as Cookie from 'js-cookie';
 export class SwitchLanguageComponent extends Vue {
     private _current: 'ru' | 'en';
     
-    render(h) {
+    public render(h) {
         return <div>
                     <button class="btn btn-link cursor" onClick={this.toggle} style="cursor: pointer;">
                         <span lang="ru">
@@ -26,7 +26,7 @@ export class SwitchLanguageComponent extends Vue {
                </div>;
     }
 
-    get current() {
+    public get current() {
         if (this._current) {
             return this._current;
         }
@@ -40,11 +40,11 @@ export class SwitchLanguageComponent extends Vue {
         return this._current = lang;
     }
 
-    get inverse() {
+    public get inverse() {
         return this.current === 'ru' ? 'en' : 'ru';
     }
 
-    toggle() {
+    public toggle() {
         this._current = this.inverse;
         Cookie.set('lang', this._current);
 
