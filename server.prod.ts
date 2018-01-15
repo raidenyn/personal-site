@@ -18,6 +18,7 @@ async function createExecution(lang: string) {
 }
 
 server.use('/data', express.static('dist/data', { etag: true }));
+server.use('/sw.js', express.static('dist/sw.js', { etag: true }));
 server.use(express.static('dist', { maxAge: '30d' }));
 (async () => {
     const langs = {
