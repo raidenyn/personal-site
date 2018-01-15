@@ -7,6 +7,8 @@ import * as Cookie from 'js-cookie';
     metaInfo: {
         title: 'Not Found',
     },
+    name: 'switch-lang',
+    serverCacheKey: props => '-',
 })
 export class SwitchLanguageComponent extends Vue {
     private _current: 'ru' | 'en';

@@ -3,7 +3,10 @@ import { Component, Watch } from 'vue-property-decorator';
 import { Link } from './link';
 import { Logger } from '../../util/log';
 
-@Component
+@Component({
+    name: 'navbar',
+    serverCacheKey: props => '-',
+})
 export class NavbarComponent extends Vue {
     public inverted: boolean = true; // default value
 

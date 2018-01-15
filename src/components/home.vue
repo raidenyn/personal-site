@@ -11,7 +11,7 @@ import '../types/env';
         title: '$lang-en(Home)$lang-ru(Домашняя страница)'
     },
     name: 'home',
-    serverCacheKey: (props) => '123',
+    serverCacheKey: props => '-',
 })
 export default class HomeComponent extends Vue {
     render(h, c) {

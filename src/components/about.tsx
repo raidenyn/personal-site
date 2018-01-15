@@ -10,6 +10,8 @@ import { ILogos, LogosClient } from '../clients/logos';
     metaInfo: {
         title: '$lang-en(About)$lang-ru(О сайте)',
     },
+    name: 'about',
+    serverCacheKey: props => '-',
 })
 export class AboutComponent extends Vue {
     public logos?: ILogos;

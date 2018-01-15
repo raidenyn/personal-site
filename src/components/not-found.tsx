@@ -5,6 +5,8 @@ import Component from 'vue-class-component';
     metaInfo: {
         title: 'Not Found',
     },
+    name: 'not-found',
+    serverCacheKey: props => '-',
 })
 export class NotFoundPage extends Vue {
     render(h) {
