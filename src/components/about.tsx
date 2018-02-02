@@ -14,7 +14,7 @@ import { ILogos, LogosClient } from '../clients/logos';
     serverCacheKey: props => '-',
 })
 export class AboutComponent extends Vue {
-    public logos?: ILogos;
+    public logos: ILogos;
     
     /**
      * This prefetch function load data directly from a data client

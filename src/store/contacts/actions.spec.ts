@@ -1,7 +1,7 @@
 // tslint:disable:no-unused-expression
 import { ContactsActions } from './actions';
 import { expect } from 'chai';
-import MockAdapter = require('axios-mock-adapter');
+import MockAdapter from 'axios-mock-adapter';
 import contactsModule from './';
 import createStore, { AppStoreType } from '../';
 import '../../util/chai.pluggins';

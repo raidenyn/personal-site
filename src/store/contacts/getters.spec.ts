@@ -1,7 +1,7 @@
 // tslint:disable:no-unused-expression
 import { ContactsGetters } from './getters';
 import { expect } from 'chai';
-import MockAdapter = require('axios-mock-adapter');
+import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 import contentModule from './';
 import createStore, { AppStoreType } from '../';
