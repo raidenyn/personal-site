@@ -14,7 +14,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.mixin(prefetch);
 
-Vue.use(Meta, {
+Vue.use(Meta as any, {
     ssrAttribute: 'meta-ssr',
 });
 

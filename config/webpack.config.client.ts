@@ -139,14 +139,14 @@ export function clientConfig(options: IClientAppWebpackOptions) {
              */
             new CopyWebpackPlugin([{
                 from: 'src/assets',
-                to: './assets',
+                to: 'assets',
             }]),
             /**
              * Copy data files
              */
             new CopyWebpackPlugin([{
                 from: 'data',
-                to: './data',
+                to: 'data',
             }]),
             /**
              * Generate Vue SSR manifest for client side

@@ -4,19 +4,7 @@ import { Request } from 'express';
 
 declare module 'vue/types/vue' {
     interface Vue {
-        metaInfo(): IMetaInfo;
-
         $meta(): IMetaProvider;
-    }
-
-    interface VueConstructor<V extends Vue = Vue> {
-        use<T>(plugin: Meta, options?: IMetaOptions): void;
-    }
-}
-
-declare module 'vue/types/options' {
-    interface ComponentOptions<V extends Vue> {
-        metaInfo?: IMetaInfo;
     }
 }
 
