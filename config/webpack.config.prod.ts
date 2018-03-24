@@ -11,7 +11,7 @@ import webpack = require('webpack');
 import UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 import HtmlWebpackPlugin = require('html-webpack-plugin');
 import CompressionPlugin = require('compression-webpack-plugin');
-import PurifyCSSPlugin = require('purifycss-webpack');
+import PurgecssPlugin = require('purgecss-webpack-plugin');
 import DefinePlugin = require('webpack/lib/DefinePlugin');
 import ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -41,18 +41,13 @@ export function clientProdConfig(options: IClientAppWebpackOptions) {
             /**
              * Remove all unused css definitions
              */
-            new PurifyCSSPlugin({
+            new PurgecssPlugin({
                 paths: [
                     ...glob.sync(root('src/**/*.html')),
                     ...glob.sync(root('src/**/*.vue')),
                     ...glob.sync(root('src/**/*.vuex')),
                     ...glob.sync(root('src/**/*.tsx')),
                 ],
-                purifyOptions: {
-                    info: true,
-                    whitelist: ['*navbar*'],
-                },
-                minimize: true,
             }),
             new webpack.HashedModuleIdsPlugin(),
             new HtmlWebpackPlugin({
