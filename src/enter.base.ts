@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import * as Meta from 'vue-meta';
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 
 import createRouter from './router';
 import createStore from './store';
@@ -9,8 +8,6 @@ import prefetch from './mixins/prefetch';
 import { sync } from 'vuex-router-sync';
 
 import './types/env';
-
-Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.mixin(prefetch);
 
@@ -25,6 +22,6 @@ export default () : Vue => {
     return new Vue({
         store,
         router,
-        ...app,   
+        ...app,
     } as any);
 };

@@ -6,13 +6,14 @@
             },
             "loose": true,
             "debug": false,
-            "module": "commonjs",
+            "modules": false,
             "useBuiltIns": "usage"
         }]
     ],
     "plugins": [
         "transform-vue-jsx",
         "transform-class-properties",
+        "syntax-dynamic-import",
         ["@babel/plugin-transform-runtime", {
             "helpers": false,
             "polyfill": false,

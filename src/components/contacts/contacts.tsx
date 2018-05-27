@@ -17,14 +17,14 @@ import './contacts.scss';
         contact: ContactComponent,
     },
 })
-export class ContactsComponent extends Vue {
-    public static prefetch ({ store, route }: { store: AppStoreType, route: Route }) {
+export default class ContactsComponent extends Vue {
+    public static prefetch ({ store }: { store: AppStoreType, route: Route }) {
         // return Promise from the action
         return store.actions.contacts.load();
     }
-    
+
     public get items() {
-        return this.$store.state.contacts.list; 
+        return this.$store.state.contacts.list;
     }
 
     public render(h) {

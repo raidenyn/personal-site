@@ -4,20 +4,19 @@ import express = require('express');
 const opn = require('opn');
 const port = 8080;
 
-
 server.use(express.static('dist'));
 server.get('*', async (req: Request, res: Response) => {
     try {
         const lang = req.cookies.lang || 'ru';
 
         const renderer = await createRenderer(lang);
-        
+
         renderer.renderToString(req, (err, html) => {
             if (err) {
                 res.status(500).end(err.stack);
                 return;
             }
-            if (req.route.statusCode) {
+            if (req.route && req.route.statusCode) {
                 res.status(req.route.statusCode);
             }
             res.end(html);

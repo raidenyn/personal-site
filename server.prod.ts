@@ -30,19 +30,19 @@ server.use(express.static('dist', { maxAge: '30d' }));
         const lang = req.cookies.lang || 'en';
 
         const exec = langs[lang];
-        
+
         exec.renderer.renderToString(req, (err, html) => {
             if (err) {
                 res.write(exec.spaFallback);
                 res.end(`<!--SSR Error:\n${err ? err.stack : 'unknown error'}-->`);
             } else {
-                if (req.route.statusCode) {
+                if (req.route && req.route.statusCode) {
                     res.status(req.route.statusCode);
                 }
                 res.end(html);
             }
         });
     });
-    
+
     server.listen(port);
 })();

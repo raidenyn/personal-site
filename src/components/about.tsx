@@ -13,16 +13,16 @@ import { ILogos, LogosClient } from '../clients/logos';
     name: 'about',
     serverCacheKey: props => '-',
 })
-export class AboutComponent extends Vue {
+export default class AboutComponent extends Vue {
     public logos: ILogos;
-    
+
     /**
      * This prefetch function load data directly from a data client
      * The data from server called every time on new component instance is created
      */
     public static async prefetch ({ store, route }: { store: AppStoreType, route: Route }) {
         const client = new LogosClient();
-        
+
         // call data from the server
         const logos = await client.list();
 

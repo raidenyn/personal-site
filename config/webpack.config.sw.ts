@@ -2,7 +2,7 @@
 import { root } from '../helpers';
 import webpack = require('webpack');
 
-import WriteFilePlugin = require('write-file-webpack-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 
 export function swConfig(): webpack.Configuration {
     return {
@@ -23,8 +23,8 @@ export function swConfig(): webpack.Configuration {
                     enforce: 'pre',
                     loader: 'tslint-loader',
                 },
-                { 
-                    test: /\.ts$/, 
+                {
+                    test: /\.ts$/,
                     use: [
                         'babel-loader',
                         'ts-loader',

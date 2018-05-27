@@ -3,9 +3,9 @@ import { VueRouter, Component } from 'vue-router/types/router';
 import { Route } from 'vue-router';
 
 export async function prefetchComponents(
-    store: AppStoreType, 
-    router: VueRouter, 
-    to: Route = router.currentRoute, 
+    store: AppStoreType,
+    router: VueRouter,
+    to: Route = router.currentRoute,
     from?: Route,
 ): Promise<any[]> {
     const matched = router.getMatchedComponents(to);
@@ -15,6 +15,11 @@ export async function prefetchComponents(
     // so we compare them until the two matched lists differ
     let diffed = false;
     const activated = matched.filter((component, i) => {
+        if (process.env.NODE_ENV !== 'production') {
+            if (!component) {
+                console.log('Matched component is undefined. Probably you have set wrong async import to the route.');
+            }
+        }
         return diffed || (diffed = (prevMatched[i] !== component));
     }).filter((component: any) => {
         return typeof component.prefetch === 'function';
@@ -36,7 +41,7 @@ export function restoreComponents(
     router: VueRouter,
 ): void {
     const components = router.getMatchedComponents()
-                             .filter((comp: any) => typeof comp.prefetch === 'function');
+                             .filter((component: any) => component && typeof component.prefetch === 'function');
 
     if (componentStates.length !== components.length) {
         throw new Error('SS data is not matched to components.');

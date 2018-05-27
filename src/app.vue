@@ -25,7 +25,7 @@ export default {
 };
 </script>
 
-<template>
+<template lang="html">
   <div id="app-main"> 
     <header class="header clearfix">
       <nav class="navbar navbar-expand-sm navbar-dark justify-content-between">
@@ -52,10 +52,10 @@ export default {
 
     <footer class="footer">
         <div class="copyright">
-            <p lang="en">YN 2017</p>
-            <p lang="ru">ЮН 2017</p>
+            <p lang="en">YN 2017-2018</p>
+            <p lang="ru">ЮН 2017-2018</p>
             <small class="text-muted">v{{ version }}</small>
         </div>
-    </footer>
+    </footer> 
   </div>
 </template>

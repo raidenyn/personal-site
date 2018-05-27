@@ -28,7 +28,7 @@ if (state) {
             restoreComponents(componentStates, app.$router);
 
             app.$router.beforeResolve((to, from, next) => {
-                prefetchComponents(app.$store, app.$router, to, from).then(next as any, next);
+                return prefetchComponents(app.$store, app.$router, to, from).then(next as any, next);
             });
         });
     }

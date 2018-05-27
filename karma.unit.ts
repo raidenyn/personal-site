@@ -12,7 +12,7 @@ export default function (config: Config) {
             '**/*.ts': ['webpack'],
         },
         webpack: testConfig({ lang: 'en' }),
-        webpackMiddlewareOptions: {
+        webpackMiddleware: {
             serverSideRender: true,
         },
         reporters: ['mocha'],

@@ -1,35 +1,56 @@
 // tslint:disable:variable-name
 import { root } from '../helpers';
 import { clientConfig, configurations,  IClientAppWebpackOptions } from './webpack.config.client';
+import { Configuration } from 'webpack';
 import env from '../environment/prod.env';
 
-import merge = require('webpack-merge');
-import fs = require('fs');
-import glob = require('glob');
-import path = require('path');
-import webpack = require('webpack');
-import UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
-import HtmlWebpackPlugin = require('html-webpack-plugin');
-import CompressionPlugin = require('compression-webpack-plugin');
-import PurgecssPlugin = require('purgecss-webpack-plugin');
-import DefinePlugin = require('webpack/lib/DefinePlugin');
-import ExtractTextPlugin = require('extract-text-webpack-plugin');
+const merge = require('webpack-merge');
+const fs = require('fs');
+const glob = require('glob');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+const DefinePlugin = require('webpack/lib/DefinePlugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
-export function clientProdConfig(options: IClientAppWebpackOptions) {
+export function clientProdConfig(options: IClientAppWebpackOptions): Configuration {
     const base = clientConfig(options);
 
     return merge(base, {
         /**
          * For production environment emit all files with hashes
-         * This files should be cached by proxyies and clients.
+         * This files should be cached by proxies and clients.
          */
         output: {
             filename: 'js/[name].[chunkhash:10].js',
             publicPath: '/',
-            sourceMapFilename: '[file].map',
-            chunkFilename: '[name].[chunkhash:10].chunk.js',
+            sourceMapFilename: 'js/[file].map',
+            chunkFilename: 'js/[name].[chunkhash:10].chunk.js',
         },
         devtool: false,
+        mode: 'production',
+        optimization: {
+            minimize: true,
+            minimizer: [
+                // https://github.com/webpack-contrib/uglifyjs-webpack-plugin
+                new UglifyJsPlugin({
+                    cache: true,
+                    parallel: true,
+                    uglifyOptions: {
+                        ecma: 6,
+                        compress: true,
+                        mangle: true,
+                        toplevel: true, // danger!!!
+                    },
+                    sourceMap: true,
+                }),
+            ],
+        },
         plugins: [
             /**
              * Extract all styles into separated files
@@ -49,7 +70,6 @@ export function clientProdConfig(options: IClientAppWebpackOptions) {
                     ...glob.sync(root('src/**/*.tsx')),
                 ],
             }),
-            new webpack.HashedModuleIdsPlugin(),
             new HtmlWebpackPlugin({
                 inject: false,
                 template: root('/src/ssr-layout.html'),
@@ -86,6 +106,14 @@ export function clientProdConfig(options: IClientAppWebpackOptions) {
                 },
             }),
             /**
+             * Mark all script files as 'preload' in html head
+             */
+            new ScriptExtHtmlWebpackPlugin({
+                defaultAttribute: 'defer',
+                preload: [/polyfills|vendor|main/],
+                prefetch: [/chunk/],
+            }),
+            /**
              * Precompress all files
              */
             new CompressionPlugin({
@@ -95,8 +123,12 @@ export function clientProdConfig(options: IClientAppWebpackOptions) {
             new DefinePlugin({
                 ENVIRONMENT: env,
             }),
+            new BundleAnalyzerPlugin({
+                analyzerMode: 'static',
+                reportFilename: '../.report/bundle.html',
+            }),
         ],
-    });
+    } as Configuration as any) as any;
 }
 
 export default configurations(clientProdConfig);

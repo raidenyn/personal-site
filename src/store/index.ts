@@ -9,7 +9,7 @@ Vue.use(install);
 
 const createStore = ({ strict } = { strict: ENVIRONMENT.MODE !== 'production' }) => {
     const root = module().child('contacts', contacts);
-    
+
     return store(root, {
         strict,
     });

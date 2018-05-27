@@ -1,6 +1,7 @@
 // tslint:disable:variable-name
 import { root } from '../helpers';
 import { clientConfig, configurations, IClientAppWebpackOptions } from './webpack.config.client';
+import { Configuration } from 'webpack';
 
 import env from '../environment/dev.env';
 
@@ -11,7 +12,7 @@ import WriteFilePlugin = require('write-file-webpack-plugin');
 import DefinePlugin = require('webpack/lib/DefinePlugin');
 import ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-export function clientDevConfig(options: IClientAppWebpackOptions) {
+export function clientDevConfig(options: IClientAppWebpackOptions): Configuration {
     const base = clientConfig(options);
 
     return merge(base, {
@@ -25,6 +26,7 @@ export function clientDevConfig(options: IClientAppWebpackOptions) {
          * Enable including source map
          */
         devtool: 'source-map',
+        mode: 'development',
         plugins: [
             /**
              * Extract all styles into separated file
@@ -77,7 +79,7 @@ export function clientDevConfig(options: IClientAppWebpackOptions) {
                 'Access-Control-Allow-Origin': '*',
             },
         },
-    });
+    } as Configuration as any) as any;
 }
 
 export default configurations(clientDevConfig);

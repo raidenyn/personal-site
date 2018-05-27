@@ -1,19 +1,20 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import HomeComponent from './components/home.vue';
-import { AboutComponent } from './components/about';
-import { ContactsComponent } from './components/contacts';
-import { NotFoundPage } from './components/not-found';
 
 // register the plugin
 Vue.use(VueRouter);
-   
+
+async function component(path: string, componentName: string) {
+    const module = await import(path);
+    return module[componentName];
+}
+
 export default () => new VueRouter({
     routes: [
-        { path: '/', component: HomeComponent },
-        { path: '/about', component: AboutComponent },
-        { path: '/contacts', component: ContactsComponent },
-        { path: '*', component: NotFoundPage },
+        { path: '/', component: () => import('./components/home.vue') },
+        { path: '/about', component: () => import('./components/about') },
+        { path: '/contacts', component: () => import('./components/contacts') },
+        { path: '*', component: () => import('./components/not-found') },
     ],
     mode: 'history',
 });
