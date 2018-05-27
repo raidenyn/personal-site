@@ -5,7 +5,7 @@ This is home page of [my site](https://ynagaev.ru). It was created as starting p
 ## Main features
 
 * Main code are based on [Vue framework 2.5.*](https://vuejs.org/)
-* All site code and build configurations wrote on [TypeScript 2.6.*](https://www.typescriptlang.org/)
+* All site code and build configurations wrote on [TypeScript 2.8.*](https://www.typescriptlang.org/)
 * [TSLint](https://palantir.github.io/tslint/) rules for all scripts
 * For storing date the site uses on [Vuex 3.0.*](https://vuex.vuejs.org)
 * Server Side Rendering (SSR) based on [vue-ssr](https://ssr.vuejs.org/)
