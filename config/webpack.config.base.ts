@@ -35,7 +35,10 @@ export function baseConfig(options: IAppWebpackOptions) {
                     use: [
                         {
                             loader: 'tslint-loader',
-                            options: { /* https://github.com/wbuchwalter/tslint-loader */ },
+                            options: {
+                                /* https://github.com/wbuchwalter/tslint-loader */
+                                fix: true,
+                            },
                         },
                     ],
                 },

@@ -4,11 +4,6 @@ import VueRouter from 'vue-router';
 // register the plugin
 Vue.use(VueRouter);
 
-async function component(path: string, componentName: string) {
-    const module = await import(path);
-    return module[componentName];
-}
-
 export default () => new VueRouter({
     routes: [
         { path: '/', component: () => import('./components/home.vue') },

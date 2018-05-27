@@ -9,7 +9,7 @@ export function registerServiceWorker(): void {
 }
 
 function getServiceWorker(): ServiceWorkerContainer | undefined {
-    return window 
+    return window
            && window.navigator
            && window.navigator.serviceWorker
            || undefined;

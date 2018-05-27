@@ -14,7 +14,7 @@ import { SiteLinkComponent } from '../shared/site-link';
 export class NavbarComponent extends Vue {
     public inverted: boolean = true; // default value
 
-    public object = { 
+    public object = {
         default: 'Default object property!',
     }; // objects as default values don't need to be wrapped into functions
 

@@ -12,7 +12,7 @@ import * as Cookie from 'js-cookie';
 })
 export class SwitchLanguageComponent extends Vue {
     private _current: 'ru' | 'en';
-    
+
     public render(h) {
         return <div>
                     <button class="btn btn-link cursor" onClick={this.toggle} style="cursor: pointer;">
