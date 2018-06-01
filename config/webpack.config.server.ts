@@ -45,6 +45,7 @@ export function serverConfig(options: IServerAppWebpackOptions): Configuration {
                 /\.s?css$/,
                 /babel/,
                 /core-js/,
+                /regenerator-runtime/,
             ],
         }),
         plugins: [

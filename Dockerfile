@@ -1,12 +1,20 @@
-## Node 8.*
-FROM node:carbon
+FROM node:10-alpine as base
 LABEL mantainer='Yuriy Nagaev'
 
-COPY ./dist.tgz /temp/
+FROM node:10 AS build
+WORKDIR /src
+COPY . .
+RUN yarn install && yarn prod
+
+FROM build AS package
+RUN yarn package
+
+FROM base AS final
+COPY --from=package /src/dist.tgz /tmp
 
 RUN mkdir /var/www \
-    && tar -xvzf /temp/dist.tgz -C /var/www/ \
-    && rm /temp/dist.tgz \
+    && tar -xvzf /tmp/dist.tgz -C /var/www/ \
+    && rm /tmp/dist.tgz \
     && cd /var/www/package/ \
     && yarn install --production \
     && yarn cache clean
