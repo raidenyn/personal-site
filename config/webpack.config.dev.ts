@@ -11,10 +11,9 @@ import merge = require('webpack-merge');
 import HtmlWebpackPlugin = require('html-webpack-plugin');
 import WriteFilePlugin = require('write-file-webpack-plugin');
 import DefinePlugin = require('webpack/lib/DefinePlugin');
-import ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 export function clientDevConfig(options: IClientAppWebpackOptions): Configuration {
-    const base = clientConfig(options);
+    const base = clientConfig({ isDev: true , ...options });
 
     return merge(base, {
         /**
@@ -29,13 +28,6 @@ export function clientDevConfig(options: IClientAppWebpackOptions): Configuratio
         devtool: 'source-map',
         mode: 'development',
         plugins: [
-            /**
-             * Extract all styles into separated file
-             */
-            new ExtractTextPlugin({
-                filename: 'css/[name].css',
-                allChunks: true,
-            }),
             /**
              * Force swap all files to disk
              * For SSR environment all files is processed by Express

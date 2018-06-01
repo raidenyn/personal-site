@@ -4,14 +4,9 @@
         "moduleResolution": "node",
         "target": "es2016",
         "sourceMap": true,
-        "allowSyntheticDefaultImports": true,
         "alwaysStrict": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "strictFunctionTypes": true,
-        "strictNullChecks": true,
-        "noEmitHelpers": true,
-        "importHelpers": true,
         "noImplicitReturns": true
     },
     "exclude": [

@@ -4,22 +4,23 @@ import { clientConfig, configurations,  IClientAppWebpackOptions } from './webpa
 import { Configuration } from 'webpack';
 import env from '../environment/prod.env';
 
-const merge = require('webpack-merge');
-const fs = require('fs');
-const glob = require('glob');
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
-const PurgecssPlugin = require('purgecss-webpack-plugin');
-const DefinePlugin = require('webpack/lib/DefinePlugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+import merge = require('webpack-merge');
+import fs = require('fs');
+import glob = require('glob');
+import path = require('path');
+import webpack = require('webpack');
+import HtmlWebpackPlugin = require('html-webpack-plugin');
+import CompressionPlugin = require('compression-webpack-plugin');
+import PurgecssPlugin = require('purgecss-webpack-plugin');
+import DefinePlugin = require('webpack/lib/DefinePlugin');
+import MiniCssExtractPlugin = require('mini-css-extract-plugin');
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+import UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+import ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+import OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 export function clientProdConfig(options: IClientAppWebpackOptions): Configuration {
-    const base = clientConfig(options);
+    const base = clientConfig({ isDev: false , ...options });
 
     return merge(base, {
         /**
@@ -49,15 +50,15 @@ export function clientProdConfig(options: IClientAppWebpackOptions): Configurati
                     },
                     sourceMap: true,
                 }),
+                new OptimizeCSSAssetsPlugin({}),
             ],
         },
         plugins: [
             /**
              * Extract all styles into separated files
              */
-            new ExtractTextPlugin({
+            new MiniCssExtractPlugin({
                 filename: 'css/[name].[hash:10].css',
-                allChunks: true,
             }),
             /**
              * Remove all unused css definitions
@@ -69,6 +70,7 @@ export function clientProdConfig(options: IClientAppWebpackOptions): Configurati
                     ...glob.sync(root('src/**/*.vuex')),
                     ...glob.sync(root('src/**/*.tsx')),
                 ],
+                minimize: true,
             }),
             new HtmlWebpackPlugin({
                 inject: false,

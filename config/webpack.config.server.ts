@@ -6,10 +6,11 @@ import { Configuration } from 'webpack';
 import prodEnv from '../environment/prod.env';
 import devEnv from '../environment/dev.env';
 
-const merge = require('webpack-merge');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
+import merge = require('webpack-merge');
+import webpack = require('webpack');
+import HtmlWebpackPlugin = require('html-webpack-plugin');
+import VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
+import nodeExternals = require('webpack-node-externals');
 
 export interface IServerAppWebpackOptions extends IAppWebpackOptions { }
 
@@ -39,6 +40,13 @@ export function serverConfig(options: IServerAppWebpackOptions): Configuration {
                 },
             ],
         },
+        externals: nodeExternals({
+            whitelist: [
+                /\.s?css$/,
+                /babel/,
+                /core-js/,
+            ],
+        }),
         plugins: [
             /**
              * Set server side constants

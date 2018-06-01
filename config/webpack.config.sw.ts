@@ -2,7 +2,7 @@
 import { root } from '../helpers';
 import webpack = require('webpack');
 
-const WriteFilePlugin = require('write-file-webpack-plugin');
+import WriteFilePlugin = require('write-file-webpack-plugin');
 
 export function swConfig(): webpack.Configuration {
     return {

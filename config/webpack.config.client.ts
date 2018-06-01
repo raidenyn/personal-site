@@ -11,14 +11,17 @@ import merge = require('webpack-merge');
 import VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 import CopyWebpackPlugin = require('copy-webpack-plugin');
 import autoprefixer = require('autoprefixer');
-import ExtractTextPlugin = require('extract-text-webpack-plugin');
 import FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+
+import MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 export function configurations(config: (options: IClientAppWebpackOptions) => webpack.Configuration, options?: IClientAppWebpackOptions) {
     return baseConfigurations(config, options);
 }
 
-export interface IClientAppWebpackOptions extends IAppWebpackOptions { }
+export interface IClientAppWebpackOptions extends IAppWebpackOptions {
+    isDev: boolean;
+}
 
 export function clientConfig(options: IClientAppWebpackOptions) {
     const base = baseConfig(options);
@@ -56,34 +59,29 @@ export function clientConfig(options: IClientAppWebpackOptions) {
                 {
                     test: /\.scss$/,
                     use: [
+                        options.isDev ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
                         {
-                            loader: 'vue-style-loader',
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: true,
+                                importLoaders: 2,
+                            },
                         },
-                        ...ExtractTextPlugin.extract({
-                            use: [{
-                                loader: 'css-loader',
-                                options: {
-                                    sourceMap: true,
-                                    importLoaders: 2,
-                                },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: () => [autoprefixer],
+                                sourceMap: true,
                             },
-                            {
-                                loader: 'postcss-loader',
-                                options: {
-                                    plugins: () => [autoprefixer],
-                                    sourceMap: true,
-                                },
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                outputStyle: 'expanded',
+                                sourceMap: true,
+                                sourceMapContents: true,
                             },
-                            {
-                                loader: 'sass-loader',
-                                options: {
-                                    outputStyle: 'expanded',
-                                    sourceMap: true,
-                                    sourceMapContents: true,
-                                },
-                            },
-                            ],
-                        }),
+                        },
                     ],
                 },
             ],
@@ -95,6 +93,12 @@ export function clientConfig(options: IClientAppWebpackOptions) {
             usedExports: true,
             splitChunks: {
                 cacheGroups: {
+                    styles: {
+                        name: 'styles',
+                        test: /\.css$/,
+                        chunks: 'all',
+                        enforce: true,
+                    },
                     polyfills: {
                         chunks: 'all',
                         name: 'polyfills',
