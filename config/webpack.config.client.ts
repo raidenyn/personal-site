@@ -55,9 +55,10 @@ export function clientConfig(options: IClientAppWebpackOptions) {
                  */
                 {
                     test: /\.scss$/,
-                    use: [{
-                        loader: 'vue-style-loader',
-                    },
+                    use: [
+                        {
+                            loader: 'vue-style-loader',
+                        },
                         ...ExtractTextPlugin.extract({
                             use: [{
                                 loader: 'css-loader',

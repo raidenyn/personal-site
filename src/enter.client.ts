@@ -30,11 +30,13 @@ if (state) {
             app.$router.beforeResolve((to, from, next) => {
                 return prefetchComponents(app.$store, app.$router, to, from).then(next as any, next);
             });
+
+            app.$mount('#app-main', /* hydrating: */ true);
         });
     }
+} else {
+    app.$mount('#app-outlet', /* hydrating: */ false);
 }
-
-app.$mount('#app-outlet');
 
 if (ENVIRONMENT.MODE === 'production') {
     registerServiceWorker();

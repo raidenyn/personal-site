@@ -14,9 +14,9 @@ import '../types/env';
     serverCacheKey: props => '-',
 })
 export default class HomeComponent extends Vue {
-    public render(h, c) {
-        return <div>
-                    <span lang="en">
+    public render(h) {
+        return <div>2
+                    <div lang="en">
                         <h1>Hi everebody!</h1>
                         <p>You are in Yuriy Nagaev's home page</p>
                         <p>Actually I have no idea what you can find interesting here</p>
@@ -24,9 +24,9 @@ export default class HomeComponent extends Vue {
                             Anyway you can look at <router-link to="/about">tech stack</router-link> of this site 
                             or check <router-link to="/contacts">my contacts</router-link>.
                         </p>
-                    </span>
+                    </div>
 
-                    <span lang="ru">
+                    <div lang="ru">
                         <h1>Всем привет!</h1>
                         <p>Вы находитесь на домашней странице Юрия Нагаева</p>
                         <p>И, признаться, я совершенно не знаю, что бы вас могло здесь заинтересовать.</p>
@@ -34,7 +34,7 @@ export default class HomeComponent extends Vue {
                             Так или иначе вы можете посмотреть на <router-link to="/about">технологический стек</router-link> этого сайта 
                             или проверить <router-link to="/contacts">мою контактную информацию</router-link>.
                         </p>
-                    </span>
+                    </div>
                 </div>;
     }
 }

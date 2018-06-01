@@ -6,18 +6,11 @@ import { SiteLinkComponent } from '../shared/site-link';
 
 @Component({
     name: 'navbar',
-    serverCacheKey: props => '-',
     components: {
         'site-link': SiteLinkComponent,
     },
 })
 export class NavbarComponent extends Vue {
-    public inverted: boolean = true; // default value
-
-    public object = {
-        default: 'Default object property!',
-    }; // objects as default values don't need to be wrapped into functions
-
     public links: Link[] = [
         new Link('$lang-en(Home)$lang-ru(Главная)', '/'),
         new Link('$lang-en(About)$lang-ru(О сайте)', '/about'),
@@ -33,7 +26,6 @@ export class NavbarComponent extends Vue {
 
     public mounted() {
         if (!this.logger) this.logger = new Logger();
-        this.$nextTick(() => this.logger.info(this.object.default));
     }
 
     public render(h) {
