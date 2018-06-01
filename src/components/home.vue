@@ -15,7 +15,7 @@ import '../types/env';
 })
 export default class HomeComponent extends Vue {
     public render(h) {
-        return <div>2
+        return <div>
                     <div lang="en">
                         <h1>Hi everebody!</h1>
                         <p>You are in Yuriy Nagaev's home page</p>

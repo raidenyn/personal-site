@@ -2,6 +2,7 @@
 import { root } from '../helpers';
 import { clientConfig, configurations, IClientAppWebpackOptions } from './webpack.config.client';
 import { Configuration } from 'webpack';
+import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 
 import env from '../environment/dev.env';
 
@@ -78,7 +79,7 @@ export function clientDevConfig(options: IClientAppWebpackOptions): Configuratio
             headers: {
                 'Access-Control-Allow-Origin': '*',
             },
-        },
+        } as DevServerConfiguration,
     } as Configuration as any) as any;
 }
 
