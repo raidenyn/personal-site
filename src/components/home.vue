@@ -17,7 +17,7 @@ export default class HomeComponent extends Vue {
     public render(h) {
         return <div>
                     <div lang="en">
-                        <h1>Hi everebody!</h1>
+                        <h1>Hi everybody!</h1>
                         <p>You are in Yuriy Nagaev's home page</p>
                         <p>Actually I have no idea what you can find interesting here</p>
                         <p>
