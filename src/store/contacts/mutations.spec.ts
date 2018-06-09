@@ -23,7 +23,7 @@ describe('ContentModule - Mutations', () => {
     afterEach(() => {
         mock.restore();
     });
-    
+
     describe('add', () => {
         let add: typeof mutations.add;
 

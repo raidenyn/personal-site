@@ -48,7 +48,6 @@ export function clientProdConfig(options: IClientAppWebpackOptions): Configurati
                         mangle: true,
                         toplevel: true, // danger!!!
                     },
-                    sourceMap: true,
                 }),
                 new OptimizeCSSAssetsPlugin({}),
             ],

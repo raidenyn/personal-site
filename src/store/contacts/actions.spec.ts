@@ -23,7 +23,7 @@ describe('ContentModule - Actions', () => {
     afterEach(() => {
         mock.restore();
     });
-    
+
     describe('load', () => {
         let load: typeof actions.load;
 

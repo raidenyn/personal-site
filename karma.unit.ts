@@ -1,7 +1,6 @@
 import { testConfig } from './config/webpack.config.test';
-import { Config, ConfigOptions } from 'karma';
 
-export default function (config: Config) {
+export default function (config) {
     config.set({
         basePath: '',
         frameworks: ['mocha', 'chai', 'sinon'],

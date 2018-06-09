@@ -23,7 +23,7 @@ describe('ContentModule - Getters', () => {
     afterEach(() => {
         mock.restore();
     });
-    
+
     describe('count', () => {
         let count: typeof getters.count;
 
