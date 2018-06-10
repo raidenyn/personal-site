@@ -5,10 +5,7 @@ import { Configuration } from 'webpack';
 import env from '../environment/prod.env';
 
 import merge = require('webpack-merge');
-import fs = require('fs');
 import glob = require('glob');
-import path = require('path');
-import webpack = require('webpack');
 import HtmlWebpackPlugin = require('html-webpack-plugin');
 import CompressionPlugin = require('compression-webpack-plugin');
 import PurgecssPlugin = require('purgecss-webpack-plugin');
@@ -18,6 +15,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 import ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 import OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+import WebpackPwaManifest = require('webpack-pwa-manifest');
 
 export function clientProdConfig(options: IClientAppWebpackOptions): Configuration {
     const base = clientConfig({ isDev: false , ...options });
@@ -105,6 +103,20 @@ export function clientProdConfig(options: IClientAppWebpackOptions): Configurati
                     minifyCSS: true,
                     minifyURLs: true,
                 },
+            }),
+            new WebpackPwaManifest({
+                name: `Nagaev's Web App`,
+                short_name: 'YNagaev',
+                description: 'My personal site',
+                background_color: '#333',
+                theme_color: '#333',
+                inject: true,
+                icons: [
+                    {
+                        src: root('src/assets/img/logo.svg'),
+                        sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+                    },
+                ],
             }),
             /**
              * Mark all script files as 'preload' in html head
