@@ -1,20 +1,37 @@
+import workbox, { IMatchContext, MatchCallback } from 'workbox-sw';
+import { matchExtensions } from './utils/match-extensions';
+
 const sw = self as any as ServiceWorkerGlobalScope;
 
-const cacheVersion = 'v1';
-
-sw.addEventListener('fetch', (event) => {
-    if (!event.request.url.startsWith('chrome-extension')
-        && event.request.method === 'GET'
-    ) {
-        event.respondWith(
-            fetch(event.request).then((response) => {
-                return caches.open(cacheVersion).then((cache) => {
-                    cache.put(event.request, response.clone());
-                    return response;
-                });
-            }).catch(() => {
-                return caches.match(event.request, { cacheName: cacheVersion });
-            }),
-        );
-    }
+workbox.setConfig({
+    debug: SW_ENVIRONMENT.DEBUG_MODE,
 });
+
+workbox.skipWaiting();
+workbox.clientsClaim();
+
+/**
+ * The workboxSW.precacheAndRoute() method efficiently caches and responds to
+ * requests for URLs in the manifest.
+ * See https://goo.gl/S9QRab
+ */
+sw.__precacheManifest = [].concat(sw.__precacheManifest || []);
+workbox.precaching.suppressWarnings(false);
+workbox.precaching.precacheAndRoute(sw.__precacheManifest, {});
+
+// unhased images should be returned as soon as possible, but also should be revalidated on server
+workbox.routing.registerRoute(
+    matchExtensions(
+        ['svg', 'jpe?g', 'png'],
+    ),
+    workbox.strategies.staleWhileRevalidate(),
+    'GET');
+// hashed scripts and styles should be always used from cashe
+workbox.routing.registerRoute(
+    matchExtensions(
+        ['js', 'css'],
+    ),
+    workbox.strategies.cacheFirst(),
+    'GET');
+// other data should be loaded from server at first
+workbox.routing.registerRoute(/.*/, workbox.strategies.networkFirst(), 'GET');

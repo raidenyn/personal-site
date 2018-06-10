@@ -17,8 +17,10 @@ async function createExecution(lang: string) {
     };
 }
 
-server.use('/data', express.static('dist/data', { etag: true }));
-server.use('/sw.js', express.static('dist/sw.js', { etag: true }));
+server.use('/data', express.static('dist/data', { etag: true, immutable: false }));
+server.use('/sw-:lang.js', (req, res) => {
+    res.sendFile(path.resolve(`dist/sw-${req.params.lang}.js`), { immutable: false, etag: true });
+});
 server.use(express.static('dist', { maxAge: '30d' }));
 (async () => {
     const langs = {

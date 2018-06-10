@@ -35,6 +35,8 @@ export class SwitchLanguageComponent extends Vue {
 
         if (lang !== 'ru') {
             lang = 'en';
+        } else {
+            lang = 'ru';
         }
 
         return this._current = lang;

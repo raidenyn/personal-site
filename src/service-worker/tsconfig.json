@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "lib": [
-            "dom",
+            "webworker",
             "es2017"
         ],
         "module": "esnext",
@@ -16,14 +16,6 @@
         "strictNullChecks": true,
         "noEmitHelpers": true,
         "importHelpers": true,
-        "noImplicitReturns": true,
-        "jsx": "preserve"
-    },
-    "exclude": [
-        "node_modules",
-        "./src/service-worker/**/*"
-    ],
-    "include": [
-        "./src/**/*"        
-    ]
+        "noImplicitReturns": true
+    }
 }

@@ -5,7 +5,9 @@ export function registerServiceWorker(): void {
         return;
     }
 
-    serviceWorker.register('/sw.js');
+    window.addEventListener('load', () => {
+        serviceWorker.register(`/sw-${LANG}.js`);
+    });
 }
 
 function getServiceWorker(): ServiceWorkerContainer | undefined {

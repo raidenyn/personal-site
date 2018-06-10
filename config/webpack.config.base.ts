@@ -2,6 +2,7 @@
 import { root } from '../helpers';
 import webpack = require('webpack');
 import VueLoaderPlugin = require('vue-loader/lib/plugin');
+import DefinePlugin = require('webpack/lib/DefinePlugin');
 import { Configuration } from 'webpack';
 
 export interface IAppWebpackOptions {
@@ -113,6 +114,9 @@ export function baseConfig(options: IAppWebpackOptions) {
         },
         plugins: [
             new VueLoaderPlugin(),
+            new DefinePlugin({
+                LANG: `'${options.lang}'`,
+            }),
         ],
     } as Configuration as any; // cast to any to avoid TS definitions miss match. ToDo: remove any in the future
 }

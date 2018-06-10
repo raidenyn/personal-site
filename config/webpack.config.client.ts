@@ -12,8 +12,8 @@ import VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 import CopyWebpackPlugin = require('copy-webpack-plugin');
 import autoprefixer = require('autoprefixer');
 import FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-
 import MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import workboxPlugin = require('workbox-webpack-plugin');
 
 export function configurations(config: (options: IClientAppWebpackOptions) => webpack.Configuration, options?: IClientAppWebpackOptions) {
     return baseConfigurations(config, options);
@@ -40,8 +40,9 @@ export function clientConfig(options: IClientAppWebpackOptions) {
             main: root('/src/enter.client.ts'),
             /**
              * Additional Bootstrap files
+             * the entrance is disabled due to the code is not used on site now
              */
-            bootstrap,
+            // bootstrap,
         },
         resolve: {
             /**
@@ -182,6 +183,16 @@ export function clientConfig(options: IClientAppWebpackOptions) {
                     yandex: true,
                     windows: true,
                 },
+            }),
+            new workboxPlugin.InjectManifest({
+                swSrc: 'dist/sw.js',
+                swDest: `sw-${options.lang}.js`,
+                exclude: [
+                    /\.map$/,
+                    /\.cache/,
+                    /vue-ssr.*\.json$/,
+                    /\.gz$/,
+                ],
             }),
         ],
     } as Configuration as any) as any;  // cast to `any` to avoid TS definitions miss match. ToDo: remove any in the future

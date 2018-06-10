@@ -21,7 +21,7 @@
     "build": "yarn run test && yarn run prod && yarn run package",
     "clean": "rimraf dist && rimraf coverage && rimraf dist.tgz",
     "package": "yarn pack --filename dist.tgz",
-    "prod": "yarn run clean && run-p prod:client prod:sw prod:server",
+    "prod": "yarn run clean && yarn prod:sw && run-p prod:client prod:server",
     "prod:client": "cross-env NODE_ENV=production TS_NODE_PROJECT=tsconfig.node.json webpack --config config/webpack.config.prod.ts --progress --hide-modules --mode production",
     "prod:server": "cross-env NODE_ENV=production TS_NODE_PROJECT=tsconfig.node.json webpack --config config/webpack.config.server.ts --progress --hide-modules --mode production",
     "prod:sw": "cross-env NODE_ENV=production TS_NODE_PROJECT=tsconfig.node.json webpack --config config/webpack.config.sw.ts --progress --hide-modules --mode production",
@@ -30,7 +30,7 @@
     "coverage:open": "opn coverage/html-ts/index.html",
     "coverage:remap": "remap-istanbul -i coverage/json/coverage-final.json -o coverage/html-ts -t html",
     "coverage:run": "cross-env NODE_ENV=development TS_NODE_PROJECT=tsconfig.node.json karma start karma.coverage.ts",
-    "dev": "yarn run clean && run-p dev:ssr dev:client dev:sw dev:server",
+    "dev": "yarn run clean && run-p dev:sw dev:ssr dev:client dev:server",
     "dev:client": "cross-env TS_NODE_PROJECT=tsconfig.node.json webpack-dev-server -d --hot --config config/webpack.config.dev.ts --mode development",
     "dev:server": "cross-env TS_NODE_PROJECT=tsconfig.node.json webpack --watch --config config/webpack.config.server.ts --mode development",
     "dev:sw": "cross-env TS_NODE_PROJECT=tsconfig.node.json webpack --watch --config config/webpack.config.sw.ts --mode development",
@@ -71,7 +71,8 @@
     "vuex": "^3.0.1",
     "vuex-class": "^0.3.1",
     "vuex-router-sync": "^5.0.0",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "workbox-webpack-plugin": "^3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.49",

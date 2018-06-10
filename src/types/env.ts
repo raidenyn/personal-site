@@ -9,3 +9,5 @@ declare interface IEnvironment {
 }
 
 declare const ENVIRONMENT: IEnvironment;
+
+declare const LANG: IEnvironment;

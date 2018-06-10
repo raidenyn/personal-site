@@ -1,5 +1,5 @@
 import createApp from './enter.base';
-import { registerServiceWorker } from './service-worker/registration';
+import { registerServiceWorker } from './sw-regisration';
 import { renderSsrHydration } from './render.ssr';
 import { renderPureClient } from './render.spa';
 

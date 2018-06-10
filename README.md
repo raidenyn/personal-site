@@ -15,7 +15,7 @@ This is home page of [my site](https://ynagaev.ru). It was created as starting p
 * Using [Bootstrap 4](https://getbootstrap.com/) as style framework with [SASS](http://sass-lang.com/) compilation and modifications via sass variables.
 * Using [Font Awesome 5](https://fontawesome.com/) for site icons.
 * Generating site favicons for all popular platforms on build
-* Using Service Worker for working in offline
+* Using [WorkBox 3](https://developers.google.com/web/tools/workbox/) tools for working with Service Worker features
 * Using Server Side [Component Cache](https://ssr.vuejs.org/en/caching.html)
 * Run client side tests on [Karma](https://karma-runner.github.io/1.0/index.html)
 * Generate test coverage report by [Istanbul project](https://istanbul.js.org/)
