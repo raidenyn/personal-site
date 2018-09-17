@@ -1,10 +1,8 @@
-import { IMatchContext, MatchCallback } from 'workbox-sw';
-
 export interface IMatchExtensionsOptions {
     exclude?: string[];
 }
 
-export function matchExtensions(extensions: string[], options: IMatchExtensionsOptions = {}) : MatchCallback {
+export function matchExtensions(extensions: string[], options: IMatchExtensionsOptions = {}) : any {
     const regexs = {
         include: extensions.map(extension => new RegExp(`\.${extension}$`)),
         exclude: undefined as any,
@@ -14,7 +12,7 @@ export function matchExtensions(extensions: string[], options: IMatchExtensionsO
         regexs.exclude = options.exclude.map(extension => new RegExp(`\.${extension}$`));
     }
 
-    return (context: IMatchContext) => {
+    return (context: any) => {
         if (regexs.exclude) {
             for (const regex of regexs.exclude) {
                 const result = regex.exec(context.url.pathname);

@@ -2,7 +2,7 @@
     "compilerOptions": {
         "lib": [
             "webworker",
-            "es2017"
+            "es2017",
         ],
         "module": "esnext",
         "moduleResolution": "node",
@@ -17,5 +17,5 @@
         "noEmitHelpers": true,
         "importHelpers": true,
         "noImplicitReturns": true
-    }
+    },
 }

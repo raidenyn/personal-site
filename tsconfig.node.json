@@ -7,7 +7,12 @@
         "alwaysStrict": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "noImplicitReturns": true
+        "noImplicitReturns": true,
+        "listEmittedFiles": true,
+        "typeRoots" : [
+            "./node_modules/@types",
+            "./src/types",
+        ],
     },
     "exclude": [
         "node_modules"

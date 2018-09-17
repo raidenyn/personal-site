@@ -1,7 +1,13 @@
 FROM node:10.10.0-alpine as base
 LABEL mantainer='Yuriy Nagaev'
 
-FROM node:10.10.0-alpine AS build
+FROM node:10.10.0-alpine AS restore
+WORKDIR /src
+COPY package.json .
+COPY yarn.lock .
+RUN yarn install
+
+FROM restore AS build
 WORKDIR /src
 COPY . .
 RUN yarn install && yarn prod

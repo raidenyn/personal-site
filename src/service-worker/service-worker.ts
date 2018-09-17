@@ -1,4 +1,4 @@
-import workbox, { IMatchContext, MatchCallback } from 'workbox-sw';
+import workbox from 'workbox-sw';
 import { matchExtensions } from './utils/match-extensions';
 
 const sw = self as any as ServiceWorkerGlobalScope;
@@ -15,7 +15,7 @@ workbox.clientsClaim();
  * requests for URLs in the manifest.
  * See https://goo.gl/S9QRab
  */
-sw.__precacheManifest = [].concat(sw.__precacheManifest || []);
+sw.__precacheManifest = sw.__precacheManifest || [];
 workbox.precaching.suppressWarnings(false);
 workbox.precaching.precacheAndRoute(sw.__precacheManifest, {});
 
