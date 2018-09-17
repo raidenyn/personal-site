@@ -1,8 +1,6 @@
 import { Vue } from 'vue/types/vue';
-import { Route } from 'vue-router';
 import '../types/prefetch';
 import { ComponentOptions } from 'vue/types/options';
-import { prefetchComponents } from '../util/prefetch-components';
 
 export default {
     data: () => ({

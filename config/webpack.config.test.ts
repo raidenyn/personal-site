@@ -1,5 +1,4 @@
 import { baseConfig, configurations, IAppWebpackOptions } from './webpack.config.base';
-import env from '../environment/dev.env';
 
 import merge = require('webpack-merge');
 import DefinePlugin = require('webpack/lib/DefinePlugin');

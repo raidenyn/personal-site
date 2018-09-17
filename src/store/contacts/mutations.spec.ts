@@ -3,7 +3,6 @@ import { ContactsMutations } from './mutations';
 import { expect } from 'chai';
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
-import contentModule from './';
 import createStore, { AppStoreType } from '../';
 import '../../util/chai.pluggins';
 
@@ -36,7 +35,10 @@ describe('ContentModule - Mutations', () => {
 
             add({ id: '2', text: 'text2', link: 'link2' });
 
-            expect(store.state.contacts.list).is.deep.equal([{ id: '1', text: 'text', link: 'link' }, { id: '2', text: 'text2', link: 'link2' }]);
+            expect(store.state.contacts.list).is.deep.equal([
+                { id: '1', text: 'text', link: 'link' },
+                { id: '2', text: 'text2', link: 'link2' },
+            ]);
         });
     });
 
@@ -55,7 +57,7 @@ describe('ContentModule - Mutations', () => {
             expect(store.state.contacts.list).is.deep.equal([{ id: '1', text: 'text', link: 'link' }]);
         });
 
-        it(`shouldn't change anything on empty list`, () => {
+        it("shouldn't change anything on empty list", () => {
             store.state.contacts.list = [];
 
             pop();

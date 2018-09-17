@@ -6,12 +6,12 @@ export interface IMatchExtensionsOptions {
 
 export function matchExtensions(extensions: string[], options: IMatchExtensionsOptions = {}) : MatchCallback {
     const regexs = {
-        include: extensions.map(extension => new RegExp('\.' + extension + '$')),
+        include: extensions.map(extension => new RegExp(`\.${extension}$`)),
         exclude: undefined as any,
     };
 
     if (options.exclude) {
-        regexs.exclude = options.exclude.map(extension => new RegExp('\.' + extension + '$'));
+        regexs.exclude = options.exclude.map(extension => new RegExp(`\.${extension}$`));
     }
 
     return (context: IMatchContext) => {

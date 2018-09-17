@@ -11,7 +11,7 @@ export default (context: Request) => {
     context.meta = app.$meta();
 
     if (!http.defaults.baseURL || !/^https?:\/\//.test(http.defaults.baseURL)) {
-        http.defaults.baseURL = context.protocol + '://' + context.get('host') + (http.defaults.baseURL ? http.defaults.baseURL : '');
+        http.defaults.baseURL = `${context.protocol}://${context.get('host')}${(http.defaults.baseURL ? http.defaults.baseURL : '')}`;
     }
 
     async function preparePage() {

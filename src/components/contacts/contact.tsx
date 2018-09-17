@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
-import { AppStoreType } from '../../store/index';
-import { Route } from 'vue-router';
 import { IContact } from '../../clients/contacts';
 
-import faGithub from '@fortawesome/fontawesome-free-brands/faGithub';
-import faLinkedin from '@fortawesome/fontawesome-free-brands/faLinkedin';
-import faEnvelope from '@fortawesome/fontawesome-free-solid/faEnvelope';
+// import { library } from '@fortawesome/fontawesome-svg-core';
+
+import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons/faLinkedin';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
 
 const icons = {
     linkedin: faLinkedin,
@@ -17,7 +17,7 @@ const icons = {
 @Component({
     name: 'contact',
     components: {
-        'font-awesome-icon': () => import('@fortawesome/vue-fontawesome'),
+        'font-awesome-icon': async () => (await import('@fortawesome/vue-fontawesome')).FontAwesomeIcon,
     },
     beforeCreate: () => {},
     serverCacheKey: (props: ContactComponent) => props.contact.id,

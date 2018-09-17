@@ -1,7 +1,5 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Logger } from '../util/log';
-import { spawn } from 'child_process';
 import { AppStoreType } from '../store/index';
 import { Route } from 'vue-router';
 import { ILogos, LogosClient } from '../clients/logos';

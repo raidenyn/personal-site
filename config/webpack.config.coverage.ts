@@ -1,10 +1,11 @@
-import webpackConfig from './webpack.config.test';
+import { testConfig } from './webpack.config.test';
 import { IAppWebpackOptions, baseConfig, configurations } from './webpack.config.base';
+import { Configuration } from 'webpack';
 
 import merge = require('webpack-merge');
 
-export function coverageConfig(options: IAppWebpackOptions) {
-    const base = baseConfig(options);
+export function coverageConfig(options: IAppWebpackOptions): Configuration {
+    const base = testConfig(options);
 
     return merge(base, {
         module: {
@@ -23,7 +24,7 @@ export function coverageConfig(options: IAppWebpackOptions) {
                 },
             ],
         },
-    });
+    } as Configuration as any) as any;
 }
 
 export default configurations(coverageConfig);

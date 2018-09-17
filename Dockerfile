@@ -1,7 +1,7 @@
-FROM node:10-alpine as base
+FROM node:10.10.0-alpine as base
 LABEL mantainer='Yuriy Nagaev'
 
-FROM node:10 AS build
+FROM node:10.10.0-alpine AS build
 WORKDIR /src
 COPY . .
 RUN yarn install && yarn prod

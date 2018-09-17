@@ -2,7 +2,6 @@ import Vue from 'vue';
 import { install, module, store } from 'sinai';
 import contacts from './contacts';
 import { ContactsState } from './contacts/state';
-import { VueStore } from 'sinai/lib/vue';
 import { returnType } from '../util/return-type';
 
 Vue.use(install);

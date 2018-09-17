@@ -1,5 +1,5 @@
 import { server, createRenderer } from './server.base';
-import { error, promisify } from 'util';
+import { promisify } from 'util';
 import { Request, Response } from 'express';
 import express = require('express');
 

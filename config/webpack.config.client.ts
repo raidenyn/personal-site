@@ -143,14 +143,14 @@ export function clientConfig(options: IClientAppWebpackOptions) {
             /**
              * Copy assets folder as is
              */
-            new CopyWebpackPlugin([{
+            CopyWebpackPlugin([{
                 from: 'src/assets',
                 to: 'assets',
             }]),
             /**
              * Copy data files
              */
-            new CopyWebpackPlugin([{
+            CopyWebpackPlugin([{
                 from: 'data',
                 to: 'data',
             }]),
@@ -170,7 +170,7 @@ export function clientConfig(options: IClientAppWebpackOptions) {
                 persistentCache: true,
                 inject: true,
                 background: '#333',
-                title: `Yuriy's home site`,
+                title: "Yuriy's home site",
                 icons: {
                     android: true,
                     appleIcon: true,

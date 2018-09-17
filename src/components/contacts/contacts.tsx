@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { AppStoreType } from '../../store/index';
 import { Route } from 'vue-router';
-import { IContact } from '../../clients/contacts';
 import { ContactComponent } from './contact';
 
 import './contacts.scss';

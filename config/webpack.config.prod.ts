@@ -67,7 +67,6 @@ export function clientProdConfig(options: IClientAppWebpackOptions): Configurati
                     ...glob.sync(root('src/**/*.vuex')),
                     ...glob.sync(root('src/**/*.tsx')),
                 ],
-                minimize: true,
             }),
             new HtmlWebpackPlugin({
                 inject: false,
@@ -105,7 +104,7 @@ export function clientProdConfig(options: IClientAppWebpackOptions): Configurati
                 },
             }),
             new WebpackPwaManifest({
-                name: `Nagaev's Web App`,
+                name: "Nagaev's Web App",
                 short_name: 'YNagaev',
                 description: 'My personal site',
                 background_color: '#333',
@@ -130,7 +129,7 @@ export function clientProdConfig(options: IClientAppWebpackOptions): Configurati
              * Precompress all files
              */
             new CompressionPlugin({
-                asset: '[path].gz[query]',
+                filename: '[path].gz[query]',
                 test: /\.(js|css|html)$/,
             }),
             new DefinePlugin({

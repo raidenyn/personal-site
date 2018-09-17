@@ -21,7 +21,7 @@ export class NavbarComponent extends Vue {
 
     @Watch('$route.path')
     public pathChanged() {
-        this.logger.info('Changed current path to: ' + this.$route.path);
+        this.logger.info(`Changed current path to: ${this.$route.path}`);
     }
 
     public mounted() {

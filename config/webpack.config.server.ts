@@ -8,7 +8,6 @@ import devEnv from '../environment/dev.env';
 
 import merge = require('webpack-merge');
 import webpack = require('webpack');
-import HtmlWebpackPlugin = require('html-webpack-plugin');
 import VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
 import nodeExternals = require('webpack-node-externals');
 
